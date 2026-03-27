@@ -1,0 +1,41 @@
+postgres (The Main Database):
+
+Uses PostgreSQL to permanently store the core relational data for the application (like user accounts, gigs, etc.).
+
+It uses a "volume" (postgres_data) so that your data isn't deleted if the container shuts down.
+
+
+redis (The Cache / Temporary Store):
+
+An ultra-fast, in-memory database.
+
+It is typically used to store frequently accessed data temporarily so the system doesn't have to query the slower Postgres database every single time.
+
+
+rabbitmq (The Message Broker):
+
+Acts like a post office.
+
+If your backend needs to do something that takes a long time (like sending 1,000 emails or processing a large file), it drops a "message" in RabbitMQ and immediately goes back to serving users.
+
+
+backend (The Core API):
+
+This is the actual code for the application, built using FastAPI (a modern Python web framework).
+
+It connects to Postgres to save data, Redis to cache data, and RabbitMQ to send background tasks.
+
+It's configured for development with "hot-reloading" (--reload), meaning if you change the Python code, the server updates instantly without needing a restart.
+
+
+celery_worker (The Background Worker):
+
+This container runs Celery, a Python task queue system.
+
+It constantly listens to RabbitMQ. When the backend drops a time-consuming task into the queue, this Celery worker picks it up and processes it silently in the background so the main API stays fast and responsive.
+
+pgadmin (The Database Dashboard):
+
+A web-based graphical user interface (GUI) for PostgreSQL.
+
+Instead of using the command line to look at your database tables, you can go to localhost:5050 in your browser, log in, and view/edit your database easily.

@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "GigGuard",
+    "slug": "gigguard",
+    "version": "0.1.0",
+    "sdkVersion": "54.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTabletMode": true,
+      "bundleIdentifier": "com.gigguard.app"
+    },
+    "android": {
+      "package": "com.gigguard.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#ffffff"
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "apiUrl": "http://10.159.104.5:8000",
+      "apiVersion": "v1"
+    }
+  }
+}
