@@ -9,12 +9,13 @@ from models.base import Base  # Import Base from models
 
 settings = get_settings()
 
+connect_args = {"check_same_thread": False} if "sqlite" in settings.DATABASE_URL else {}
+
 # Create async engine
 engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.DEBUG,
-    pool_size=10,
-    max_overflow=20,
+    connect_args=connect_args
 )
 
 # Create session factory
