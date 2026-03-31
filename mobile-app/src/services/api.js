@@ -2,11 +2,11 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 // 🔧 API Base URL Configuration:
-// Your machine's current LAN IP: 10.48.228.75
+// Your machine's current LAN IP: 10.48.228.5
 // - For physical device via Expo Go → uses LAN IP below (works ✅)
 // - For Expo Web in browser → also works via LAN IP ✅
 // - If login fails after IP change, run `ipconfig` and update this IP
-const API_BASE_URL = 'http://10.48.228.75:8000/api/v1';
+const API_BASE_URL = 'http://10.48.228.5:8000/api/v1';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

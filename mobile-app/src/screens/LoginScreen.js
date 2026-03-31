@@ -35,7 +35,11 @@ export default function LoginScreen() {
       await SecureStore.setItemAsync('authToken', token);
       dispatch(setAuth({ isAuthenticated: true, token, user }));
     } catch (error) {
-      Alert.alert('Login Failed', error.response?.data?.detail || 'Invalid credentials');
+      if (!error.response) {
+        Alert.alert('Network Error', 'Could not connect to the server. Please check your backend IP configuration.');
+      } else {
+        Alert.alert('Login Failed', error.response.data?.detail || 'Invalid credentials');
+      }
     } finally {
       setLoading(false);
     }
@@ -61,7 +65,11 @@ export default function LoginScreen() {
       await SecureStore.setItemAsync('authToken', token);
       dispatch(setAuth({ isAuthenticated: true, token, user }));
     } catch (error) {
-      Alert.alert('Registration Failed', error.response?.data?.detail || 'Please try again');
+      if (!error.response) {
+        Alert.alert('Network Error', 'Could not connect to the server. Please check your backend IP configuration.');
+      } else {
+        Alert.alert('Registration Failed', error.response.data?.detail || 'Please try again');
+      }
     } finally {
       setLoading(false);
     }
